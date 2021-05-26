@@ -52,7 +52,7 @@ long int hex_to_int(char* hex) {
 
 int main() {
 	char hex1[] = "8b248FC";
-	char hex2[] = "0000000";
+	char hex2[] = "000000f";
 	char hex3[] = "fffffff";
 
     printf("%d\n", hex_to_int(hex1));
