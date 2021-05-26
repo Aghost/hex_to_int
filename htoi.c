@@ -1,11 +1,7 @@
 #include <stdio.h>
-//#include <string.h>
-
-int n_atoi(char c) {
-	return (int)c;
-}
 
 int n_strlen(char *str) {
+    // unsafe strlen
 	int i = 0;
 
 	while (str[i] != '\0') {
@@ -15,11 +11,12 @@ int n_strlen(char *str) {
 	return i;
 }
 
-long int n_htoi(char *str, char *lut, int base){
+long int n_stoi(char *str, char *mapped, int base){
 	int factor = 1;
 	int result = 0;
-	for(int i = n_strlen(str); i > 0; --i) {
-		result += factor * lut[str[i - 1]];
+
+	for (int i = n_strlen(str); i > 0; --i) {
+		result += factor * mapped[str[i - 1]];
 		factor *= base;
 	}
 	return result;
@@ -27,6 +24,7 @@ long int n_htoi(char *str, char *lut, int base){
 
 long int hex_to_int(char* hex) {
     char mapped [128] = { };
+
 	mapped['1'] = 1;
 	mapped['2'] = 2;
 	mapped['3'] = 3;
@@ -49,7 +47,7 @@ long int hex_to_int(char* hex) {
 	mapped['F'] = 15;
 	mapped['f'] = 15;
 
-    return n_htoi(hex, mapped, 16);
+    return n_stoi(hex, mapped, 16);
 }
 
 int main() {
